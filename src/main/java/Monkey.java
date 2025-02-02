@@ -19,7 +19,7 @@ public class Monkey {
             System.out.println("--------------------------------");
         } else {
             System.out.println("--------------------------------");
-            System.out.println("Here are the tasks in your list:");
+            System.out.println("Here are the tasks in your list: ");
             for (int i = 0; i < taskCounter; i++) {
                 System.out.println((i + 1) + ". " + tasks[i]);
             }
@@ -30,7 +30,7 @@ public class Monkey {
     public void markTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= taskCounter) {
             tasks[taskNumber - 1].markDone();
-            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("Nice! I've marked this task as done: ");
             System.out.println("   " + tasks[taskNumber - 1]);
         } else {
             System.out.println("Invalid task number.");
@@ -40,7 +40,7 @@ public class Monkey {
     public void unmarkTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= taskCounter) {
             tasks[taskNumber - 1].unmarkDone();
-            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println("OK, I've marked this task as not done yet: ");
             System.out.println("   " + tasks[taskNumber - 1]);
         } else {
             System.out.println("Invalid task number.");
