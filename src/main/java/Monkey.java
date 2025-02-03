@@ -1,29 +1,30 @@
 import java.util.Scanner;
 
 public class Monkey {
+    public static final String DASH_LINE = "--------------------------------";
     Task[] tasks = new Task[100];
     int taskCounter = 0;
 
     public void toAdd(String input) {
         tasks[taskCounter] = new Task(input);
         taskCounter++;
-        System.out.println("--------------------------------");
+        System.out.println(DASH_LINE);
         System.out.println("added: " + input);
-        System.out.println("--------------------------------");
+        System.out.println(DASH_LINE);
     }
 
     public void list() {
         if (taskCounter == 0) {
-            System.out.println("--------------------------------");
+            System.out.println(DASH_LINE);
             System.out.println("No tasks yet.");
-            System.out.println("--------------------------------");
+            System.out.println(DASH_LINE);
         } else {
-            System.out.println("--------------------------------");
+            System.out.println(DASH_LINE);
             System.out.println("Here are the tasks in your list: ");
             for (int i = 0; i < taskCounter; i++) {
                 System.out.println((i + 1) + ". " + tasks[i]);
             }
-            System.out.println("--------------------------------");
+            System.out.println(DASH_LINE);
         }
     }
 
@@ -52,17 +53,17 @@ public class Monkey {
         Scanner in = new Scanner(System.in);
         String input;
 
-        System.out.println("--------------------------------");
+        System.out.println(DASH_LINE);
         System.out.println("Hello! I'm Monkey!");
         System.out.println("What can I do for you?");
-        System.out.println("--------------------------------");
+        System.out.println(DASH_LINE);
 
         while (true) {
             input = in.nextLine().trim();
             if (input.equalsIgnoreCase("bye")) {
-                System.out.println("--------------------------------");
+                System.out.println(DASH_LINE);
                 System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("--------------------------------");
+                System.out.println(DASH_LINE);
                 break;
             } else if (input.equalsIgnoreCase("list")) {
                 monkey.list();
