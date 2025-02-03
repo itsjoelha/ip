@@ -14,18 +14,16 @@ public class Monkey {
     }
 
     public void list() {
+        System.out.println(DASH_LINE);
         if (taskCounter == 0) {
-            System.out.println(DASH_LINE);
             System.out.println("No tasks yet.");
-            System.out.println(DASH_LINE);
         } else {
-            System.out.println(DASH_LINE);
             System.out.println("Here are the tasks in your list: ");
             for (int i = 0; i < taskCounter; i++) {
                 System.out.println((i + 1) + ". " + tasks[i]);
             }
-            System.out.println(DASH_LINE);
         }
+        System.out.println(DASH_LINE);
     }
 
     public void markTask(int taskNumber) {
