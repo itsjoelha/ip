@@ -29,6 +29,7 @@ public class Monkey {
     }
 
     public void markTask(int taskNumber) {
+        System.out.println(DASH_LINE);
         if (taskNumber > 0 && taskNumber <= taskCounter) {
             tasks[taskNumber - 1].markDone();
             System.out.println("Nice! I've marked this task as done: ");
@@ -36,9 +37,11 @@ public class Monkey {
         } else {
             System.out.println("Invalid task number.");
         }
+        System.out.println(DASH_LINE);
     }
 
     public void unmarkTask(int taskNumber) {
+        System.out.println(DASH_LINE);
         if (taskNumber > 0 && taskNumber <= taskCounter) {
             tasks[taskNumber - 1].unmarkDone();
             System.out.println("OK, I've marked this task as not done yet: ");
@@ -46,6 +49,7 @@ public class Monkey {
         } else {
             System.out.println("Invalid task number.");
         }
+        System.out.println(DASH_LINE);
     }
 
     public static void main(String[] args) {
