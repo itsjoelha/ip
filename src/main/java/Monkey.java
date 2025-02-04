@@ -50,7 +50,9 @@ public class Monkey {
         tasks[taskCounter] = newTask;
         taskCounter++;
         System.out.println(DASH_LINE);
-        System.out.println("added: " + input);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("   " + newTask);
+        System.out.println("Now you have " + taskCounter + " tasks in the list.");
         System.out.println(DASH_LINE);
     }
 
