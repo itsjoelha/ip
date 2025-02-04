@@ -5,8 +5,49 @@ public class Monkey {
     Task[] tasks = new Task[100];
     int taskCounter = 0;
 
+    // Adds a task: todo, deadline, or event based on input
     public void toAdd(String input) {
-        tasks[taskCounter] = new Task(input);
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            System.out.println(DASH_LINE);
+            System.out.println("Invalid command format.");
+            System.out.println(DASH_LINE);
+            return;
+        }
+
+        String type = parts[0];
+        String description = parts[1];
+
+        Task newTask = null;
+
+        if (type.equals("todo")) {
+            newTask = new Todo(description);
+        } else if (type.equals("deadline")) {
+            String[] deadlineParts = description.split(" /by ", 2);
+            if (deadlineParts.length < 2) {
+                System.out.println(DASH_LINE);
+                System.out.println("Invalid command format.");
+                System.out.println(DASH_LINE);
+                return;
+            }
+            newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
+        } else if (type.equals("event")) {
+            String[] eventParts = description.split(" /from | /to ", 3);
+            if (eventParts.length < 3) {
+                System.out.println(DASH_LINE);
+                System.out.println("Invalid command format.");
+                System.out.println(DASH_LINE);
+                return;
+            }
+            newTask = new Event(eventParts[0], eventParts[1], eventParts[2]);
+        } else {
+            System.out.println(DASH_LINE);
+            System.out.println("Unknown task type.");
+            System.out.println(DASH_LINE);
+            return;
+        }
+
+        tasks[taskCounter] = newTask;
         taskCounter++;
         System.out.println(DASH_LINE);
         System.out.println("added: " + input);
