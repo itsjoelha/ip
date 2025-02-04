@@ -9,9 +9,7 @@ public class Monkey {
     public void toAdd(String input) {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2) {
-            System.out.println(DASH_LINE);
-            System.out.println("Invalid command format.");
-            System.out.println(DASH_LINE);
+            printInvalidCommand();
             return;
         }
 
@@ -25,18 +23,14 @@ public class Monkey {
         } else if (type.equals("deadline")) {
             String[] deadlineParts = description.split(" /by ", 2);
             if (deadlineParts.length < 2) {
-                System.out.println(DASH_LINE);
-                System.out.println("Invalid command format.");
-                System.out.println(DASH_LINE);
+                printInvalidCommand();
                 return;
             }
             newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
         } else if (type.equals("event")) {
             String[] eventParts = description.split(" /from | /to ", 3);
             if (eventParts.length < 3) {
-                System.out.println(DASH_LINE);
-                System.out.println("Invalid command format.");
-                System.out.println(DASH_LINE);
+                printInvalidCommand();
                 return;
             }
             newTask = new Event(eventParts[0], eventParts[1], eventParts[2]);
@@ -53,6 +47,12 @@ public class Monkey {
         System.out.println("Got it. I've added this task: ");
         System.out.println("   " + newTask);
         System.out.println("Now you have " + taskCounter + " tasks in the list.");
+        System.out.println(DASH_LINE);
+    }
+
+    private static void printInvalidCommand() {
+        System.out.println(DASH_LINE);
+        System.out.println("Invalid command format.");
         System.out.println(DASH_LINE);
     }
 
@@ -98,17 +98,12 @@ public class Monkey {
         Scanner in = new Scanner(System.in);
         String input;
 
-        System.out.println(DASH_LINE);
-        System.out.println("Hello! I'm Monkey!");
-        System.out.println("What can I do for you?");
-        System.out.println(DASH_LINE);
+        printWelcomeMessage();
 
         while (true) {
             input = in.nextLine().trim();
             if (input.equalsIgnoreCase("bye")) {
-                System.out.println(DASH_LINE);
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(DASH_LINE);
+                printExitMessage();
                 break;
             } else if (input.equalsIgnoreCase("list")) {
                 monkey.list();
@@ -122,5 +117,18 @@ public class Monkey {
                 monkey.toAdd(input);
             }
         }
+    }
+
+    private static void printExitMessage() {
+        System.out.println(DASH_LINE);
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(DASH_LINE);
+    }
+
+    private static void printWelcomeMessage() {
+        System.out.println(DASH_LINE);
+        System.out.println("Hello! I'm Monkey!");
+        System.out.println("What can I do for you?");
+        System.out.println(DASH_LINE);
     }
 }
