@@ -2,12 +2,12 @@ public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by) {
-        super(description, "[D]");
+        super(description, "deadline");
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + by + ")";
+        return "[D]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 }
