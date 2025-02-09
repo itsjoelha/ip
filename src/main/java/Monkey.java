@@ -6,7 +6,7 @@ public class Monkey {
     int taskCounter = 0;
 
     // Adds a task: todo, deadline, or event based on input
-    public void toAdd(String input) {
+    public void addTask(String input) {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2) {
             printInvalidCommand();
@@ -114,7 +114,7 @@ public class Monkey {
                 int taskNumber = Integer.parseInt(input.substring(7).trim());
                 monkey.unmarkTask(taskNumber);
             } else {
-                monkey.toAdd(input);
+                monkey.addTask(input);
             }
         }
     }
