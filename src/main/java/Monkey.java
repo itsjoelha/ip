@@ -7,45 +7,48 @@ public class Monkey {
 
     // Adds a task: todo, deadline, or event based on input
     public void addTask(String input) {
-        String[] parts = input.split(" ", 2);
-        if (parts.length < 2) {
-            printInvalidCommand();
-            return;
-        }
+        try {
+            String[] parts = input.split(" ", 2);
+            if (parts.length < 2) {
+                throw new MonkeyException("Oh no! This command is invalid.");
+            }
 
-        String type = parts[0];
-        String description = parts[1];
+            String type = parts[0];
+            String description = parts[1];
 
-        Task newTask = null;
+            Task newTask = null;
 
-        if (type.equals("todo")) {
-            newTask = new Todo(description);
-        } else if (type.equals("deadline")) {
-            String[] deadlineParts = description.split(" /by ", 2);
-            if (deadlineParts.length < 2) {
+            if (type.equals("todo")) {
+                newTask = new Todo(description);
+            } else if (type.equals("deadline")) {
+                String[] deadlineParts = description.split(" /by ", 2);
+                if (deadlineParts.length < 2) {
+                    printInvalidCommand();
+                    return;
+                }
+                newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
+            } else if (type.equals("event")) {
+                String[] eventParts = description.split(" /from | /to ", 3);
+                if (eventParts.length < 3) {
+                    printInvalidCommand();
+                    return;
+                }
+                newTask = new Event(eventParts[0], eventParts[1], eventParts[2]);
+            } else {
                 printInvalidCommand();
                 return;
             }
-            newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
-        } else if (type.equals("event")) {
-            String[] eventParts = description.split(" /from | /to ", 3);
-            if (eventParts.length < 3) {
-                printInvalidCommand();
-                return;
-            }
-            newTask = new Event(eventParts[0], eventParts[1], eventParts[2]);
-        } else {
-            printInvalidCommand();
-            return;
-        }
 
-        tasks[taskCounter] = newTask;
-        taskCounter++;
-        System.out.println(DASH_LINE);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("   " + newTask);
-        System.out.println("Now you have " + taskCounter + " tasks in the list.");
-        System.out.println(DASH_LINE);
+            tasks[taskCounter] = newTask;
+            taskCounter++;
+            System.out.println(DASH_LINE);
+            System.out.println("Got it. I've added this task: ");
+            System.out.println("   " + newTask);
+            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+            System.out.println(DASH_LINE);
+        } catch (MonkeyException e) {
+            printInvalidCommand();
+        }
     }
 
     private static void printInvalidCommand() {
