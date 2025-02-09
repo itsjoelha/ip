@@ -35,9 +35,7 @@ public class Monkey {
             }
             newTask = new Event(eventParts[0], eventParts[1], eventParts[2]);
         } else {
-            System.out.println(DASH_LINE);
-            System.out.println("Unknown task type.");
-            System.out.println(DASH_LINE);
+            printInvalidCommand();
             return;
         }
 
@@ -52,7 +50,7 @@ public class Monkey {
 
     private static void printInvalidCommand() {
         System.out.println(DASH_LINE);
-        System.out.println("Invalid command format.");
+        System.out.println("Oh no! This command is invalid.");
         System.out.println(DASH_LINE);
     }
 
