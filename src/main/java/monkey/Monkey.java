@@ -1,4 +1,10 @@
+package monkey;
+
 import java.util.Scanner;
+import monkey.task.Task;
+import monkey.task.Todo;
+import monkey.task.Deadline;
+import monkey.task.Event;
 
 public class Monkey {
     public static final String DASH_LINE = "------------------------------------------------------";
