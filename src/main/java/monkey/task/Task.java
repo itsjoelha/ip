@@ -1,6 +1,6 @@
 package monkey.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String taskType;
@@ -27,4 +27,6 @@ public class Task {
     public String toString() {
         return "["  + taskType.toUpperCase().charAt(0) + "]" + "[" + getStatusIcon() + "] " + description;
     }
+
+    public abstract String toFileString();
 }

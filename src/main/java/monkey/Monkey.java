@@ -6,10 +6,18 @@ import monkey.task.Task;
 import monkey.task.Todo;
 import monkey.task.Deadline;
 import monkey.task.Event;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Monkey {
     public static final String DASH_LINE = "------------------------------------------------------";
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+    private Storage storage;
+
+    public Monkey() {
+        storage = new Storage("data/monkey.txt");  // Initialize storage
+        tasks = storage.loadTasks();  // Load tasks from file
+    }
 
     // Adds a task: todo, deadline, or event based on input
     public void addTask(String input) throws MonkeyException {
@@ -42,6 +50,7 @@ public class Monkey {
         }
 
         tasks.add(newTask);
+        storage.saveTasks(tasks);
         System.out.println(DASH_LINE);
         System.out.println("Got it. I've added this task: ");
         System.out.println("   " + newTask);
@@ -59,6 +68,7 @@ public class Monkey {
 
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             System.out.println(DASH_LINE);
+            storage.saveTasks(tasks);
         } else {
             printInvalidTaskNumber();
         }
@@ -66,7 +76,7 @@ public class Monkey {
 
     public void list() {
         System.out.println(DASH_LINE);
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             System.out.println("No tasks yet.");
         } else {
             System.out.println("Here are the tasks in your list: ");
@@ -84,6 +94,7 @@ public class Monkey {
             System.out.println("Nice! I've marked this task as done: ");
             System.out.println("   " + tasks.get(taskNumber - 1));
             System.out.println(DASH_LINE);
+            storage.saveTasks(tasks);
         } else {
             printInvalidTaskNumber();
         }
@@ -96,6 +107,7 @@ public class Monkey {
             System.out.println("OK, I've marked this task as not done yet: ");
             System.out.println("   " + tasks.get(taskNumber - 1));
             System.out.println(DASH_LINE);
+            storage.saveTasks(tasks);
         } else {
             printInvalidTaskNumber();
         }
