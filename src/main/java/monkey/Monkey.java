@@ -5,11 +5,18 @@ import monkey.task.Task;
 import monkey.task.Todo;
 import monkey.task.Deadline;
 import monkey.task.Event;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Monkey {
     public static final String DASH_LINE = "------------------------------------------------------";
-    Task[] tasks = new Task[100];
-    int taskCounter = 0;
+    private ArrayList<Task> tasks;  // Use ArrayList instead of Task[]
+    private Storage storage;
+
+    public Monkey() {
+        storage = new Storage("data/monkey.txt");  // Initialize storage
+        tasks = storage.loadTasks();  // Load tasks from file
+    }
 
     // Adds a task: todo, deadline, or event based on input
     public void addTask(String input) throws MonkeyException {
@@ -41,47 +48,49 @@ public class Monkey {
             throw new MonkeyException("Oh no! This command is invalid.");
         }
 
-        tasks[taskCounter] = newTask;
-        taskCounter++;
+        tasks.add(newTask);
+        storage.saveTasks(tasks);
         System.out.println(DASH_LINE);
         System.out.println("Got it. I've added this task: ");
         System.out.println("   " + newTask);
-        System.out.println("Now you have " + taskCounter + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         System.out.println(DASH_LINE);
     }
 
     public void list() {
         System.out.println(DASH_LINE);
-        if (taskCounter == 0) {
+        if (tasks.isEmpty()) {
             System.out.println("No tasks yet.");
         } else {
             System.out.println("Here are the tasks in your list: ");
-            for (int i = 0; i < taskCounter; i++) {
-                System.out.println((i + 1) + ". " + tasks[i]);
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }
         System.out.println(DASH_LINE);
     }
 
     public void markTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= taskCounter) {
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
             System.out.println(DASH_LINE);
-            tasks[taskNumber - 1].markDone();
+            tasks.get(taskNumber - 1).markDone();
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("   " + tasks[taskNumber - 1]);
+            System.out.println("   " + tasks.get(taskNumber - 1));
             System.out.println(DASH_LINE);
+            storage.saveTasks(tasks);
         } else {
             printInvalidTaskNumber();
         }
     }
 
     public void unmarkTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= taskCounter) {
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
             System.out.println(DASH_LINE);
-            tasks[taskNumber - 1].unmarkDone();
+            tasks.get(taskNumber - 1).unmarkDone();
             System.out.println("OK, I've marked this task as not done yet: ");
-            System.out.println("   " + tasks[taskNumber - 1]);
+            System.out.println("   " + tasks.get(taskNumber - 1));
             System.out.println(DASH_LINE);
+            storage.saveTasks(tasks);
         } else {
             printInvalidTaskNumber();
         }
