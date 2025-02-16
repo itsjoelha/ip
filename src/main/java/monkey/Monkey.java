@@ -50,6 +50,26 @@ public class Monkey {
         System.out.println(DASH_LINE);
     }
 
+    public void deleteTask(int taskNumber) {
+        if (taskNumber > 0 && taskNumber <= taskCounter) {
+            System.out.println(DASH_LINE);
+            System.out.println("OK. I've deleted this task: ");
+            System.out.println("   " + tasks[taskNumber - 1]);
+
+            for (int i = taskNumber - 1; i < taskCounter - 1; i++) {
+                tasks[i] = tasks[i + 1];
+            }
+
+            tasks[taskCounter - 1] = null;
+            taskCounter--;
+
+            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+            System.out.println(DASH_LINE);
+        } else {
+            printInvalidTaskNumber();
+        }
+    }
+
     public void list() {
         System.out.println(DASH_LINE);
         if (taskCounter == 0) {
@@ -109,6 +129,9 @@ public class Monkey {
             } else if (input.matches("^unmark \\d+$")) {
                 int taskNumber = Integer.parseInt(input.split(" ")[1]);
                 monkey.unmarkTask(taskNumber);
+            } else if (input.matches("delete \\d+$")) {
+                int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                monkey.deleteTask(taskNumber);
             } else if (input.matches("^(todo|deadline|event)( .+)?$")) {
                 try {
                     monkey.addTask(input);
