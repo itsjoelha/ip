@@ -38,4 +38,14 @@ public class Storage {
 
         return tasks;
     }
+
+    public void saveTasks(ArrayList<Task> tasks) {
+        try (FileWriter fw = new FileWriter(filePath)) {
+            for (Task task : tasks) {
+                fw.write(task.toFileString() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
 }
