@@ -1,5 +1,6 @@
 package monkey;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import monkey.task.Task;
 import monkey.task.Todo;
@@ -8,8 +9,7 @@ import monkey.task.Event;
 
 public class Monkey {
     public static final String DASH_LINE = "------------------------------------------------------";
-    Task[] tasks = new Task[100];
-    int taskCounter = 0;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     // Adds a task: todo, deadline, or event based on input
     public void addTask(String input) throws MonkeyException {
@@ -41,34 +41,48 @@ public class Monkey {
             throw new MonkeyException("Oh no! This command is invalid.");
         }
 
-        tasks[taskCounter] = newTask;
-        taskCounter++;
+        tasks.add(newTask);
         System.out.println(DASH_LINE);
         System.out.println("Got it. I've added this task: ");
         System.out.println("   " + newTask);
-        System.out.println("Now you have " + taskCounter + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         System.out.println(DASH_LINE);
+    }
+
+    public void deleteTask(int taskNumber) {
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
+            System.out.println(DASH_LINE);
+            System.out.println("OK. I've deleted this task: ");
+            System.out.println("   " + tasks.get(taskNumber - 1));
+
+            tasks.remove(taskNumber - 1);
+
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println(DASH_LINE);
+        } else {
+            printInvalidTaskNumber();
+        }
     }
 
     public void list() {
         System.out.println(DASH_LINE);
-        if (taskCounter == 0) {
+        if (tasks.size() == 0) {
             System.out.println("No tasks yet.");
         } else {
             System.out.println("Here are the tasks in your list: ");
-            for (int i = 0; i < taskCounter; i++) {
-                System.out.println((i + 1) + ". " + tasks[i]);
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }
         System.out.println(DASH_LINE);
     }
 
     public void markTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= taskCounter) {
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
             System.out.println(DASH_LINE);
-            tasks[taskNumber - 1].markDone();
+            tasks.get(taskNumber - 1).markDone();
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("   " + tasks[taskNumber - 1]);
+            System.out.println("   " + tasks.get(taskNumber - 1));
             System.out.println(DASH_LINE);
         } else {
             printInvalidTaskNumber();
@@ -76,11 +90,11 @@ public class Monkey {
     }
 
     public void unmarkTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= taskCounter) {
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
             System.out.println(DASH_LINE);
-            tasks[taskNumber - 1].unmarkDone();
+            tasks.get(taskNumber - 1).unmarkDone();
             System.out.println("OK, I've marked this task as not done yet: ");
-            System.out.println("   " + tasks[taskNumber - 1]);
+            System.out.println("   " + tasks.get(taskNumber - 1));
             System.out.println(DASH_LINE);
         } else {
             printInvalidTaskNumber();
@@ -109,6 +123,9 @@ public class Monkey {
             } else if (input.matches("^unmark \\d+$")) {
                 int taskNumber = Integer.parseInt(input.split(" ")[1]);
                 monkey.unmarkTask(taskNumber);
+            } else if (input.matches("delete \\d+$")) {
+                int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                monkey.deleteTask(taskNumber);
             } else if (input.matches("^(todo|deadline|event)( .+)?$")) {
                 try {
                     monkey.addTask(input);
