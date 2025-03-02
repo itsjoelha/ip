@@ -65,6 +65,10 @@ public class Monkey {
         taskList.unmarkTask(taskNumber);
     }
 
+    public void findTask(String keyword) {
+        taskList.findTask(keyword);
+    }
+
     public static void main(String[] args) {
         Monkey monkey = new Monkey();
         Scanner in = new Scanner(System.in);
