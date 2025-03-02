@@ -60,26 +60,49 @@ public class Monkey {
         taskList.addTask(newTask);
     }
 
+    /**
+     * Deletes a task by its task number.
+     * @param taskNumber The index of the task to delete.
+     */
     public void deleteTask(int taskNumber) {
         taskList.deleteTask(taskNumber);
     }
 
+    /**
+     * Lists all the tasks in the task list.
+     */
     public void list() {
         taskList.listTasks();
     }
 
+    /**
+     * Marks a task as completed.
+     * @param taskNumber The index of the task to mark.
+     */
     public void markTask(int taskNumber) {
         taskList.markTask(taskNumber);
     }
 
+    /**
+     * Unmarks a completed task.
+     * @param taskNumber The index of the task to unmark.
+     */
     public void unmarkTask(int taskNumber) {
         taskList.unmarkTask(taskNumber);
     }
 
+    /**
+     * Finds tasks containing the given keyword.
+     * @param keyword The search keyword.
+     */
     public void findTask(String keyword) {
         taskList.findTask(keyword);
     }
 
+    /**
+     * The main method that runs the Monkey task manager & handles user input.
+     * @param args Command Line arguments.
+     */
     public static void main(String[] args) {
         Monkey monkey = new Monkey();
         Scanner in = new Scanner(System.in);
