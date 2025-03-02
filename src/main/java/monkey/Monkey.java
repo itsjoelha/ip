@@ -9,15 +9,26 @@ import monkey.task.Event;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The Monkey class represents a task manager that allows users to add, delete, list,
+ * mark, unmark, and find tasks. It interacts with a TaskList for managing tasks.
+ */
 public class Monkey {
     private TaskList taskList;
 
+    /**
+     * Initializes a Monkey instance with a storage system.
+     */
     public Monkey() {
         Storage storage = new Storage("data/monkey.txt");
         taskList = new TaskList(storage);
     }
 
-    // Adds a task: todo, deadline, or event based on input
+    /**
+     * Adds a task to the task list based on the user input.
+     * @param input User input indicating the task type and description.
+     * @throws MonkeyException If the input format is invalid.
+     */
     public void addTask(String input) throws MonkeyException {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
@@ -63,6 +74,10 @@ public class Monkey {
 
     public void unmarkTask(int taskNumber) {
         taskList.unmarkTask(taskNumber);
+    }
+
+    public void findTask(String keyword) {
+        taskList.findTask(keyword);
     }
 
     public static void main(String[] args) {
