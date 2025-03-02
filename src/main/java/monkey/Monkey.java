@@ -97,33 +97,7 @@ public class Monkey {
 
         while (true) {
             input = in.nextLine().trim();
-            if (input.equalsIgnoreCase("bye")) {
-                Ui.printExitMessage();
-                break;
-            } else if (input.equalsIgnoreCase("list")) {
-                monkey.list();
-            } else if (input.matches("^mark$") || input.matches("^unmark$") || (input.matches("^delete$"))) {
-                Ui.printInvalidTaskNumber();
-            } else if (input.matches("^mark \\d+$")){
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                monkey.markTask(taskNumber);
-            } else if (input.matches("^unmark \\d+$")) {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                monkey.unmarkTask(taskNumber);
-            } else if (input.matches("delete \\d+$")) {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                monkey.deleteTask(taskNumber);
-            } else if (input.matches("^(todo|deadline|event)( .+)?$")) {
-                try {
-                    monkey.addTask(input);
-                } catch (MonkeyException e) {
-                    System.out.println(Ui.DASH_LINE);
-                    System.out.println(e.getMessage());
-                    System.out.println(Ui.DASH_LINE);
-                }
-            } else {
-                Ui.printInvalidCommand();
-            }
+            Parser.parse(input, monkey);
         }
     }
 }
