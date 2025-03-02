@@ -3,21 +3,37 @@ package monkey;
 import java.util.ArrayList;
 import monkey.task.Task;
 
+/**
+ * The TaskList class manages a list of tasks, providing functionality to add, delete,
+ * mark, unmark, list, and find tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
 
+    /**
+     * Creates a TaskList with tasks loaded from storage.
+     * @param storage The storage system handling tasks.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
-        this.tasks = storage.loadTasks(); // Load tasks from storage
+        this.tasks = storage.loadTasks();
     }
 
+    /**
+     * Adds a task to the task list and saves it to storage.
+     * @param task The task to add.
+     */
     public void addTask(Task task) {
         tasks.add(task);
         storage.saveTasks(tasks);
         Ui.printTaskAdded(task, tasks.size());
     }
 
+    /**
+     * Deletes a task from the task list.
+     * @param taskNumber The index of the task to delete.
+     */
     public void deleteTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
             Task removedTask = tasks.get(taskNumber - 1);
@@ -29,10 +45,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lists all the tasks in the task list.
+     */
     public void listTasks() {
         Ui.printTaskList(tasks);
     }
 
+    /**
+     * Marks a task as completed.
+     * @param taskNumber The index of the task to mark as completed.
+     */
     public void markTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
             tasks.get(taskNumber - 1).markDone();
@@ -43,6 +66,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks a completed task.
+     * @param taskNumber The index of the task to unmark.
+     */
     public void unmarkTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
             tasks.get(taskNumber - 1).unmarkDone();
@@ -53,10 +80,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list of tasks.
+     * @return The list of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Finds and prints tasks that contain the given keyword.
+     * @param keyword The search keyword.
+     */
     public void findTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
 
