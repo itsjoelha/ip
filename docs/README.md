@@ -145,6 +145,14 @@ For example, type `randomCommand`.
 Oh no! I do not understand the command.
 ```
 
+If a command is recognized but missing required inputs, Monkey will prompt the user with the correct format.
+
+For example, type `event 1`.
+
+```
+Oh no! Events must have the format: event <task> /from <start> /to <end>
+```
+
 ## 10. Task Storage
 
 Monkey automatically saves your tasks to a file. Your task list will be available when you restart the program.
