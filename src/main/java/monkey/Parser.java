@@ -1,6 +1,15 @@
 package monkey;
 
+/**
+ * The Parser class is responsible for interpreting user commands and executing
+ * the corresponding actions in the Monkey task manager.
+ */
 public class Parser {
+    /**
+     * Parses the user input and executes the corresponding command.
+     * @param input The command entered by the user.
+     * @param monkey The Monkey instance that manages tasks.
+     */
     public static void parse(String input, Monkey monkey) {
         try {
             if (input.equalsIgnoreCase("bye")) {
