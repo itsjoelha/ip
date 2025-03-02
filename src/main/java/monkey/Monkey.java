@@ -127,7 +127,7 @@ public class Monkey {
                 break;
             } else if (input.equalsIgnoreCase("list")) {
                 monkey.list();
-            } else if (input.matches("^mark$") || input.matches("^unmark$")) {
+            } else if (input.matches("^mark$") || input.matches("^unmark$") || (input.matches("^delete$"))) {
                 printInvalidTaskNumber();
             } else if (input.matches("^mark \\d+$")){
                 int taskNumber = Integer.parseInt(input.split(" ")[1]);
