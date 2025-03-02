@@ -47,4 +47,34 @@ public class Ui {
         }
         System.out.println(DASH_LINE);
     }
+
+    public static void printTaskAdded(Task task, int totalTasks) {
+        System.out.println(DASH_LINE);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("   " + task);
+        System.out.println("Now you have " + totalTasks + " tasks in the list.");
+        System.out.println(DASH_LINE);
+    }
+
+    public static void printTaskDeleted(Task task, int totalTasks) {
+        System.out.println(DASH_LINE);
+        System.out.println("OK. I've deleted this task: ");
+        System.out.println("   " + task);
+        System.out.println("Now you have " + totalTasks + " tasks in the list.");
+        System.out.println(DASH_LINE);
+    }
+
+    public static void printTaskMarked(Task task) {
+        System.out.println(DASH_LINE);
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("   " + task);
+        System.out.println(DASH_LINE);
+    }
+
+    public static void printTaskUnmarked(Task task) {
+        System.out.println(DASH_LINE);
+        System.out.println("OK, I've marked this task as not done yet: ");
+        System.out.println("   " + task);
+        System.out.println(DASH_LINE);
+    }
 }

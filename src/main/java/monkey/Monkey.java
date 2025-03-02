@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Monkey {
-    public static final String DASH_LINE = "------------------------------------------------------";
     private ArrayList<Task> tasks;
     private Storage storage;
 
@@ -51,23 +50,14 @@ public class Monkey {
 
         tasks.add(newTask);
         storage.saveTasks(tasks);
-        System.out.println(DASH_LINE);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("   " + newTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println(DASH_LINE);
+        Ui.printTaskAdded(newTask, tasks.size());
     }
 
     public void deleteTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
-            System.out.println(DASH_LINE);
-            System.out.println("OK. I've deleted this task: ");
-            System.out.println("   " + tasks.get(taskNumber - 1));
-
+            Task removedTask = tasks.get(taskNumber - 1);
             tasks.remove(taskNumber - 1);
-
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            System.out.println(DASH_LINE);
+            Ui.printTaskDeleted(removedTask, tasks.size());
             storage.saveTasks(tasks);
         } else {
             Ui.printInvalidTaskNumber();
@@ -80,12 +70,9 @@ public class Monkey {
 
     public void markTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
-            System.out.println(DASH_LINE);
             tasks.get(taskNumber - 1).markDone();
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("   " + tasks.get(taskNumber - 1));
-            System.out.println(DASH_LINE);
             storage.saveTasks(tasks);
+            Ui.printTaskMarked(tasks.get(taskNumber - 1));
         } else {
             Ui.printInvalidTaskNumber();
         }
@@ -93,12 +80,9 @@ public class Monkey {
 
     public void unmarkTask(int taskNumber) {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
-            System.out.println(DASH_LINE);
             tasks.get(taskNumber - 1).unmarkDone();
-            System.out.println("OK, I've marked this task as not done yet: ");
-            System.out.println("   " + tasks.get(taskNumber - 1));
-            System.out.println(DASH_LINE);
             storage.saveTasks(tasks);
+            Ui.printTaskUnmarked(tasks.get(taskNumber - 1));
         } else {
             Ui.printInvalidTaskNumber();
         }
@@ -133,9 +117,9 @@ public class Monkey {
                 try {
                     monkey.addTask(input);
                 } catch (MonkeyException e) {
-                    System.out.println(DASH_LINE);
+                    System.out.println(Ui.DASH_LINE);
                     System.out.println(e.getMessage());
-                    System.out.println(DASH_LINE);
+                    System.out.println(Ui.DASH_LINE);
                 }
             } else {
                 Ui.printInvalidCommand();
