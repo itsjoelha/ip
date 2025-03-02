@@ -26,22 +26,41 @@
             this.taskType = taskType;
         }
 
+        /**
+         * Returns the status icon of the task.
+         * @return "X" if the task is completed, otherwise a space " ".
+         */
         public String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
+            return (isDone ? "X" : " ");
         }
 
+        /**
+         * Marks the task as completed.
+         */
         public void markDone() {
             isDone = true;
         }
 
+        /**
+         * Marks the task as not completed.
+         */
         public void unmarkDone() {
             isDone = false;
         }
 
+        /**
+         * Returns a string representation of the task, including its type,
+         * status, and description.
+         * @return A formatted string representing the task.
+         */
         @Override
         public String toString() {
             return "["  + taskType.toUpperCase().charAt(0) + "]" + "[" + getStatusIcon() + "] " + description;
         }
 
+        /**
+         * Returns a formatted string representation of the task for file storage.
+         * @return A string representation of the task for saving to a file.
+         */
         public abstract String toFileString();
     }
