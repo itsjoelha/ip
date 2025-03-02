@@ -21,6 +21,9 @@ public class Parser {
                 monkey.deleteTask(taskNumber);
             } else if (input.matches("^(todo|deadline|event)( .+)?$")) {
                 monkey.addTask(input);
+            } else if (input.startsWith("find ")) {
+                String keyword = input.substring(5).trim();
+                monkey.findTask(keyword);
             } else {
                 Ui.printInvalidCommand();
             }
