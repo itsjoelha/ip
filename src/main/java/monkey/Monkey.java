@@ -160,6 +160,12 @@ public class Monkey {
 
     private static void printWelcomeMessage() {
         System.out.println(DASH_LINE);
+        System.out.println("  __  __              _        \n" +
+                " |  \\/  | ___  _ __  | | _____ __     __\n" +
+                " | |\\/| |/ _ \\| '_ \\ | |/ / _ \\\\ \\   / /\n" +
+                " | |  | | (_) | | | ||   <  __/ \\ \\_/ / \n" +
+                " |_|  |_|\\___/|_| |_||_|\\_\\___|  \\   /\n" +
+                "                                 \\_/");
         System.out.println("Hello! I'm Monkey!");
         System.out.println("What can I do for you?");
         System.out.println(DASH_LINE);
