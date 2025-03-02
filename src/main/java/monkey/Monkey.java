@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Monkey {
-    private ArrayList<Task> tasks;
-    private Storage storage;
+    private TaskList taskList;
 
     public Monkey() {
-        storage = new Storage("data/monkey.txt");  // Initialize storage
-        tasks = storage.loadTasks();  // Load tasks from file
+        Storage storage = new Storage("data/monkey.txt");
+        taskList = new TaskList(storage);
     }
 
     // Adds a task: todo, deadline, or event based on input
@@ -47,45 +46,23 @@ public class Monkey {
         } else {
             throw new MonkeyException("Oh no! This command is invalid.");
         }
-
-        tasks.add(newTask);
-        storage.saveTasks(tasks);
-        Ui.printTaskAdded(newTask, tasks.size());
+        taskList.addTask(newTask);
     }
 
     public void deleteTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= tasks.size()) {
-            Task removedTask = tasks.get(taskNumber - 1);
-            tasks.remove(taskNumber - 1);
-            Ui.printTaskDeleted(removedTask, tasks.size());
-            storage.saveTasks(tasks);
-        } else {
-            Ui.printInvalidTaskNumber();
-        }
+        taskList.deleteTask(taskNumber);
     }
 
     public void list() {
-        Ui.printTaskList(tasks);
+        taskList.listTasks();
     }
 
     public void markTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= tasks.size()) {
-            tasks.get(taskNumber - 1).markDone();
-            storage.saveTasks(tasks);
-            Ui.printTaskMarked(tasks.get(taskNumber - 1));
-        } else {
-            Ui.printInvalidTaskNumber();
-        }
+        taskList.markTask(taskNumber);
     }
 
     public void unmarkTask(int taskNumber) {
-        if (taskNumber > 0 && taskNumber <= tasks.size()) {
-            tasks.get(taskNumber - 1).unmarkDone();
-            storage.saveTasks(tasks);
-            Ui.printTaskUnmarked(tasks.get(taskNumber - 1));
-        } else {
-            Ui.printInvalidTaskNumber();
-        }
+        taskList.unmarkTask(taskNumber);
     }
 
     public static void main(String[] args) {
@@ -101,4 +78,3 @@ public class Monkey {
         }
     }
 }
-
